@@ -76,4 +76,10 @@ public class UserController {
         }
         return "success";
     }
+
+    @ApiOperation("保存用户")
+    @PostMapping("addUserAdvice")
+    public String addUserAdvice(@RequestBody @Valid User user){
+        return "success";
+    }
 }
