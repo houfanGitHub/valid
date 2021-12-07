@@ -7,11 +7,14 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -60,6 +63,16 @@ public class UserController {
                     name = "param",value = "{\"id\":\"string\"}") Map<String, String> param){
         if(StringUtils.isEmpty(param.get("id"))){
             return "id不能为空";
+        }
+        return "success";
+    }
+
+
+    @ApiOperation("保存用户")
+    @PostMapping("addUser")
+    public String addUser(@RequestBody @Valid User user, BindingResult bindingResult){
+        for (ObjectError error : bindingResult.getAllErrors()) {
+            return error.getDefaultMessage();
         }
         return "success";
     }
