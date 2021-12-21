@@ -1,6 +1,7 @@
 package com.valid.controller;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.valid.common.ResultData;
 import com.valid.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -82,4 +83,24 @@ public class UserController {
     public String addUserAdvice(@RequestBody @Valid User user){
         return "success";
     }
+
+    @ApiOperation("保存用户")
+    @PostMapping("apiAddUserAdvice")
+    public String apiAddUserAdvice(@RequestBody @Valid User user){
+        return "success";
+    }
+
+    @ApiOperation("查询用户")
+    @PostMapping("testFindUser")
+    public ResultData<User> testFindUser(){
+        User user = new User();
+        user.setAccount("1001");
+        user.setPassword("123456");
+        user.setEmail("1001@user.com");
+        user.setAge(18);
+        user.setGender("M");
+        user.setRealName("testName");
+        return new ResultData<User>(user);
+    }
+
 }
